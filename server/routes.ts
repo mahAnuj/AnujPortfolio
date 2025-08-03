@@ -1,27 +1,35 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
-import { storage } from "./storage";
-import { notificationService } from "./notifications";
-import { insertContactInquirySchema } from "@shared/schema";
 import { z } from "zod";
 
+// Simple validation schema for development (matches serverless function)
+const contactFormSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Valid email is required"),
+  projectType: z.string().optional(),
+  budget: z.string().optional(),
+  message: z.string().min(1, "Message is required")
+});
+
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Contact form submission
+  // Contact form submission (development only - production uses serverless function)
   app.post("/api/contact", async (req, res) => {
     try {
-      const validatedData = insertContactInquirySchema.parse(req.body);
-      const inquiry = await storage.createContactInquiry(validatedData);
+      const validatedData = contactFormSchema.parse(req.body);
       
-      console.log("New contact inquiry received:", inquiry);
+      console.log("🧪 DEV: New contact inquiry received:", {
+        ...validatedData,
+        id: Math.random().toString(36).substr(2, 9),
+        createdAt: new Date()
+      });
       
-      // Send notifications to WhatsApp and Email
-      const notifications = await notificationService.sendInquiryNotifications(inquiry);
-      console.log("Notification results:", notifications);
+      console.log("📧 DEV: Email sending skipped in development");
+      console.log("💡 DEV: Use production environment or SendGrid test script for email testing");
       
       res.json({ 
         success: true, 
         message: "Thank you for your inquiry! I will get back to you within 24 hours.",
-        id: inquiry.id 
+        id: Math.random().toString(36).substr(2, 9)
       });
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -31,21 +39,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
           errors: error.errors 
         });
       } else {
+        console.error("Contact form error:", error);
         res.status(500).json({ 
           success: false, 
           message: "Something went wrong. Please try again." 
         });
       }
-    }
-  });
-
-  // Get all contact inquiries (for admin purposes)
-  app.get("/api/contact-inquiries", async (req, res) => {
-    try {
-      const inquiries = await storage.getContactInquiries();
-      res.json(inquiries);
-    } catch (error) {
-      res.status(500).json({ message: "Failed to fetch inquiries" });
     }
   });
 
