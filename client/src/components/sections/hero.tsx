@@ -28,8 +28,8 @@ export default function HeroSection() {
             Senior Full-Stack Developer with 14+ Years Experience
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8 max-w-3xl mx-auto">
-            Specialized in building scalable cloud-native applications, AI/LLM solutions, and modern web technologies. 
-            Currently at Adobe Systems, with extensive experience in e-commerce and mobile development.
+          Software architect specializing in AI-powered applications, cloud-native infrastructure, and enterprise-grade solutions. 
+I help companies leverage cutting-edge AI, scale their platforms, and deliver exceptional user experiences across web and mobile.
           </p>
         </div>
         
