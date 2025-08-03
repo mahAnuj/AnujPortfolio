@@ -37,7 +37,7 @@ export default function Footer() {
         </div>
         
         <div className="border-t border-border mt-8 pt-8 text-center text-muted-foreground">
-          <p>&copy; 2024 Anuj Mahajan. All rights reserved. | Professional freelance services available</p>
+          <p>&copy; 2025 Anuj Mahajan. All rights reserved. | Professional freelance services available</p>
         </div>
       </div>
     </footer>

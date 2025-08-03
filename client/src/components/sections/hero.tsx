@@ -25,7 +25,7 @@ export default function HeroSection() {
             Hi, I'm <span className="gradient-text">Anuj Mahajan</span>
           </h1>
           <h2 className="text-xl md:text-2xl lg:text-3xl text-muted-foreground mb-6">
-            Senior Full-Stack Developer with 14+ Years Experience
+            Software Architect with 14+ Years Experience
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8 max-w-3xl mx-auto">
           Software architect specializing in AI-powered applications, cloud-native infrastructure, and enterprise-grade solutions. 
