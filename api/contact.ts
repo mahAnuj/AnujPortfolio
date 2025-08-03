@@ -1,7 +1,15 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { insertContactInquirySchema } from '../shared/schema';
 import { z } from 'zod';
 import { MailService } from '@sendgrid/mail';
+
+// Contact form validation schema (self-contained for serverless)
+const insertContactInquirySchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Valid email is required"),
+  projectType: z.string().optional(),
+  budget: z.string().optional(),
+  message: z.string().min(1, "Message is required")
+});
 
 // Simple in-memory storage for demo (in production, use a database)
 interface ContactInquiry {
@@ -102,22 +110,27 @@ async function sendEmailNotification(inquiry: ContactInquiry): Promise<void> {
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  // Set CORS headers
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
-
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
-  }
-
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' });
-  }
-
   try {
+    console.log('🚀 Contact API called:', req.method, req.url);
+    
+    // Set CORS headers
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+    res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+
+    if (req.method === 'OPTIONS') {
+      console.log('✅ CORS preflight handled');
+      res.status(200).end();
+      return;
+    }
+
+    if (req.method !== 'POST') {
+      console.log('❌ Method not allowed:', req.method);
+      return res.status(405).json({ message: 'Method not allowed' });
+    }
+
+    console.log('📝 Validating request body...');
     const validatedData = insertContactInquirySchema.parse(req.body);
     
     const inquiry: ContactInquiry = {
@@ -127,26 +140,35 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     };
     
     inquiries.push(inquiry);
-    
-    console.log('New contact inquiry received:', inquiry);
+    console.log('✅ New contact inquiry received:', inquiry);
     
     // Send email notification via SendGrid
+    console.log('📧 Attempting to send email notification...');
     await sendEmailNotification(inquiry);
     
+    console.log('🎉 Contact form processed successfully');
     res.json({ 
       success: true, 
       message: "Thank you for your inquiry! I will get back to you within 24 hours.",
       id: inquiry.id 
     });
   } catch (error) {
+    console.error('❌ Contact form error details:', {
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+      body: req.body,
+      method: req.method,
+      url: req.url
+    });
+    
     if (error instanceof z.ZodError) {
+      console.log('📋 Validation error:', error.errors);
       res.status(400).json({ 
         success: false, 
         message: "Please check your form data", 
         errors: error.errors 
       });
     } else {
-      console.error('Contact form error:', error);
       res.status(500).json({ 
         success: false, 
         message: "Something went wrong. Please try again." 
