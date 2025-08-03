@@ -19,26 +19,46 @@ class EmailNotificationService {
   }
 
   async sendInquiryEmail(inquiry: ContactInquiry): Promise<boolean> {
+    // Debug logging
+    console.log('🔍 DEBUG: SendGrid API Key present:', !!process.env.SENDGRID_API_KEY);
+    console.log('🔍 DEBUG: SendGrid API Key length:', process.env.SENDGRID_API_KEY?.length || 0);
+    
     if (!this.mailService) {
-      console.log('SendGrid not configured - Email notification skipped');
+      console.log('❌ SendGrid not configured - Email notification skipped');
+      console.log('💡 To enable emails: Set SENDGRID_API_KEY environment variable');
       return false;
     }
 
     try {
       const emailContent = this.formatEmailContent(inquiry);
-      
-      await this.mailService.send({
+      const emailData = {
         to: 'mahajananuj07@gmail.com', // Your email
         from: 'mahajananuj07@gmail.com', // Must be verified sender
         subject: `🚀 New Project Inquiry: ${inquiry.projectType || 'General'} - ${inquiry.budget || 'Budget TBD'}`,
         html: emailContent,
         text: this.formatTextContent(inquiry)
+      };
+      
+      console.log('📧 DEBUG: Sending email with data:', {
+        to: emailData.to,
+        from: emailData.from,
+        subject: emailData.subject,
+        htmlLength: emailData.html.length
       });
-
+      
+      const response = await this.mailService.send(emailData);
+      
       console.log('✅ Email notification sent successfully');
+      console.log('📧 DEBUG: SendGrid response:', response[0]?.statusCode, response[0]?.headers?.['x-message-id']);
       return true;
-    } catch (error) {
+    } catch (error: any) {
       console.error('❌ Email notification failed:', error);
+      console.error('🔍 DEBUG: Error details:', {
+        message: error.message,
+        code: error.code,
+        statusCode: error.response?.status,
+        body: error.response?.body
+      });
       return false;
     }
   }
