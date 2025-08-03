@@ -40,12 +40,12 @@ This portfolio website demonstrates comprehensive technical skills across multip
 - **Language**: TypeScript with ES modules
 - **API Design**: RESTful API endpoints
 - **Database**: Dual support for in-memory storage and PostgreSQL
-- **ORM**: Drizzle ORM for type-safe database operations
+- **Email Service**: SendGrid integration for contact form notifications
 
 ### Additional Tools
-- **Email Service**: SendGrid integration for contact notifications
 - **Deployment**: Optimized for Vercel/Netlify deployment
 - **Development**: Hot reloading with Vite HMR
+- **Analytics**: Vercel Web Analytics integration
 
 ## 🚀 Quick Start
 

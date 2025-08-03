@@ -134,7 +134,7 @@ const serviceCategories = [
       { name: "GraphQL APIs", popular: true },
       { name: "RESTful APIs", popular: true },
       { name: "Prisma ORM", popular: false },
-      { name: "Drizzle ORM", popular: false }
+                { name: "Mongoose ODM", popular: false }
     ]
   },
   {
