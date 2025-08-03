@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { insertContactInquirySchema } from '../shared/schema';
 import { z } from 'zod';
+import { MailService } from '@sendgrid/mail';
 
 // Simple in-memory storage for demo (in production, use a database)
 interface ContactInquiry {
@@ -14,6 +15,91 @@ interface ContactInquiry {
 }
 
 const inquiries: ContactInquiry[] = [];
+
+// SendGrid email notification function
+async function sendEmailNotification(inquiry: ContactInquiry): Promise<void> {
+  if (!process.env.SENDGRID_API_KEY) {
+    console.log('SendGrid not configured - Email notification skipped');
+    return;
+  }
+
+  try {
+    const mailService = new MailService();
+    mailService.setApiKey(process.env.SENDGRID_API_KEY);
+
+    const formattedDate = inquiry.createdAt.toLocaleString('en-IN', {
+      timeZone: 'Asia/Kolkata',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+
+    const emailContent = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 8px 8px 0 0; }
+            .content { background: #f8f9fa; padding: 20px; border-radius: 0 0 8px 8px; }
+            .field { margin-bottom: 15px; }
+            .label { font-weight: bold; color: #555; }
+            .value { margin-top: 5px; padding: 10px; background: white; border-radius: 4px; border-left: 4px solid #667eea; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h2>🚀 New Project Inquiry!</h2>
+                <p>You have received a new project inquiry from your portfolio website.</p>
+            </div>
+            <div class="content">
+                <div class="field">
+                    <div class="label">👤 Client Name:</div>
+                    <div class="value">${inquiry.name}</div>
+                </div>
+                <div class="field">
+                    <div class="label">📧 Email:</div>
+                    <div class="value"><a href="mailto:${inquiry.email}">${inquiry.email}</a></div>
+                </div>
+                <div class="field">
+                    <div class="label">💼 Project Type:</div>
+                    <div class="value">${inquiry.projectType || 'Not specified'}</div>
+                </div>
+                <div class="field">
+                    <div class="label">💰 Budget Range:</div>
+                    <div class="value">${inquiry.budget || 'Not specified'}</div>
+                </div>
+                <div class="field">
+                    <div class="label">💬 Message:</div>
+                    <div class="value">${inquiry.message}</div>
+                </div>
+                <div class="field">
+                    <div class="label">⏰ Received:</div>
+                    <div class="value">${formattedDate}</div>
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>`;
+
+    await mailService.send({
+      to: 'mahajananuj07@gmail.com',
+      from: 'mahajananuj07@gmail.com', // Must be verified sender
+      subject: `🚀 New Project Inquiry: ${inquiry.projectType || 'General'} - ${inquiry.budget || 'Budget TBD'}`,
+      html: emailContent,
+      text: `New Project Inquiry from ${inquiry.name} (${inquiry.email}): ${inquiry.message}`
+    });
+
+    console.log('✅ Email notification sent successfully');
+  } catch (error) {
+    console.error('❌ Email notification failed:', error);
+    // Don't fail the request if email fails
+  }
+}
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Set CORS headers
@@ -44,8 +130,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     
     console.log('New contact inquiry received:', inquiry);
     
-    // TODO: Add SendGrid email notification here
-    // For now, just log the inquiry
+    // Send email notification via SendGrid
+    await sendEmailNotification(inquiry);
     
     res.json({ 
       success: true, 
