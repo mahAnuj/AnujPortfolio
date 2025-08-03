@@ -42,7 +42,7 @@ I help companies leverage cutting-edge AI, scale their platforms, and deliver ex
           </Button>
           <Button 
             variant="outline"
-            className="border-border hover:border-accent text-foreground hover:text-accent px-8 py-4 rounded-lg font-medium transition-all"
+            className="border-border hover:border-accent text-foreground hover:text-accent-foreground px-8 py-4 rounded-lg font-medium transition-all"
           >
             <Download className="mr-2 h-4 w-4" />
             View Resume
