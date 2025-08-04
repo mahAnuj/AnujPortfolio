@@ -18,9 +18,12 @@ export default function HeroSection() {
       
       <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
         <div className="mb-6">
-          <span className="inline-block px-4 py-2 bg-primary/20 text-primary rounded-full text-sm font-medium mb-4">
-            Available for Freelance Projects
-          </span>
+          <div className="flex items-center justify-center mb-6">
+            <div className="flex items-center gap-2 px-4 py-2 bg-green-500/20 border border-green-500/30 rounded-full text-sm font-medium text-green-400 animate-pulse">
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
+              <span>Available for Freelance Projects</span>
+            </div>
+          </div>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">
             Hi, I'm <span className="gradient-text">Anuj Mahajan</span>
           </h1>
@@ -39,13 +42,6 @@ I help companies leverage cutting-edge AI, scale their platforms, and deliver ex
             className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-lg font-medium transition-all transform hover:scale-105 animate-glow"
           >
             Start a Project
-          </Button>
-          <Button 
-            variant="outline"
-            className="border-border hover:border-accent text-foreground hover:text-accent-foreground px-8 py-4 rounded-lg font-medium transition-all"
-          >
-            <Download className="mr-2 h-4 w-4" />
-            View Resume
           </Button>
         </div>
 

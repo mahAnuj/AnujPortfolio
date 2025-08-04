@@ -12,6 +12,7 @@ import { apiRequest } from "@/lib/queryClient";
 interface ContactFormData {
   name: string;
   email: string;
+  country: string;
   projectType: string;
   budget: string;
   message: string;
@@ -22,6 +23,7 @@ export default function ContactSection() {
   const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
+    country: '',
     projectType: '',
     budget: '',
     message: ''
@@ -40,6 +42,7 @@ export default function ContactSection() {
       setFormData({
         name: '',
         email: '',
+        country: '',
         projectType: '',
         budget: '',
         message: ''
@@ -71,6 +74,13 @@ export default function ContactSection() {
 
   const handleInputChange = (field: keyof ContactFormData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleCountryChange = (value: string) => {
+    setFormData(prev => ({ 
+      ...prev, 
+      country: value
+    }));
   };
 
   return (
@@ -193,6 +203,24 @@ export default function ContactSection() {
               </div>
 
               <div>
+                <Label htmlFor="country">Country/Region</Label>
+                <Select value={formData.country} onValueChange={handleCountryChange}>
+                  <SelectTrigger className="mt-2">
+                    <SelectValue placeholder="Select your country/region" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="india">India</SelectItem>
+                    <SelectItem value="us">United States</SelectItem>
+                    <SelectItem value="canada">Canada</SelectItem>
+                    <SelectItem value="uk">United Kingdom</SelectItem>
+                    <SelectItem value="eu">European Union</SelectItem>
+                    <SelectItem value="australia">Australia</SelectItem>
+                    <SelectItem value="other">Other</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div>
                 <Label htmlFor="project">Project Type</Label>
                 <Select value={formData.projectType} onValueChange={(value) => handleInputChange('projectType', value)}>
                   <SelectTrigger className="mt-2">
@@ -200,11 +228,17 @@ export default function ContactSection() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="fullstack">Full-Stack Web Application</SelectItem>
+                    <SelectItem value="frontend">Frontend Web Application</SelectItem>
                     <SelectItem value="mobile">Mobile App Development</SelectItem>
+                    <SelectItem value="backend">Backend Development</SelectItem>
                     <SelectItem value="cloud">Cloud-Native Solution</SelectItem>
                     <SelectItem value="ai">AI/LLM Application</SelectItem>
                     <SelectItem value="chatbot">Chatbot Development</SelectItem>
                     <SelectItem value="ecommerce">E-commerce Platform</SelectItem>
+                    <SelectItem value="integrations">Integrations</SelectItem>
+                    <SelectItem value="testing">Testing & QA</SelectItem>
+                    <SelectItem value="devops">DevOps & Infrastructure</SelectItem>
+                    <SelectItem value="saas">SaaS Application</SelectItem>
                     <SelectItem value="other">Other</SelectItem>
                   </SelectContent>
                 </Select>
@@ -212,18 +246,14 @@ export default function ContactSection() {
 
               <div>
                 <Label htmlFor="budget">Project Budget</Label>
-                <Select value={formData.budget} onValueChange={(value) => handleInputChange('budget', value)}>
-                  <SelectTrigger className="mt-2">
-                    <SelectValue placeholder="Select budget range" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="5k-10k">$5,000 - $10,000</SelectItem>
-                    <SelectItem value="10k-25k">$10,000 - $25,000</SelectItem>
-                    <SelectItem value="25k-50k">$25,000 - $50,000</SelectItem>
-                    <SelectItem value="50k+">$50,000+</SelectItem>
-                    <SelectItem value="discuss">Let's discuss</SelectItem>
-                  </SelectContent>
-                </Select>
+                <Input
+                  id="budget"
+                  type="text"
+                  value={formData.budget}
+                  onChange={(e) => handleInputChange('budget', e.target.value)}
+                  placeholder="e.g., ₹50,000, $5,000, €4,000, or 'Let's discuss'"
+                  className="mt-2"
+                />
               </div>
 
               <div>

@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
             <div className="text-xl font-bold gradient-text mb-2">Anuj Mahajan</div>
-            <p className="text-muted-foreground">Senior Full-Stack Developer & Freelancer</p>
+            <p className="text-muted-foreground">Software Architect & Freelance Consultant</p>
           </div>
           
           <div className="flex items-center space-x-6">
@@ -20,13 +20,13 @@ export default function Footer() {
               <Linkedin className="h-5 w-5" />
             </a>
             <a 
-              href="mailto:anuj.mahajan@example.com" 
+              href="mailto:mahajananuj07@gmail.com" 
               className="text-muted-foreground hover:text-accent transition-colors"
             >
               <Mail className="h-5 w-5" />
             </a>
             <a 
-              href="https://github.com/anujmahajan" 
+              href="https://github.com/mahAnuj" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
