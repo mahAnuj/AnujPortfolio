@@ -1,0 +1,16 @@
+{
+  "name": "Anuj Mahajan - Software Architect",
+  "short_name": "Anuj Mahajan",
+  "description": "Software Architect & Freelance Consultant specializing in AI-powered applications and cloud-native solutions",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#3B82F6",
+  "background_color": "#0F172A",
+  "display": "standalone",
+  "start_url": "/"
+} 
