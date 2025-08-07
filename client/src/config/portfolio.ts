@@ -133,28 +133,41 @@ export const skillsConfig = [
 // Projects Configuration
 export const projectsConfig = [
   {
-    title: "AI Chat Assistant",
-    description: "Advanced conversational AI with RAG capabilities and knowledge base integration. Features real-time responses, context awareness, and multi-language support.",
-    technologies: ["OpenAI GPT-4", "LangChain", "Vector Database", "React", "Node.js"],
-    metrics: {
-      improvement: "85% faster response time",
-      impact: "40% increase in user engagement",
-      scale: "10,000+ conversations processed"
+    "title": "AI Support Bot Builder",
+    "description": "Complete AI assistant builder platform that transforms business documents into intelligent chatbots. Features document upload, RAG-powered responses, customizable widgets, and one-click deployment to any website.",
+    "technologies": ["Next.js 14", "TypeScript", "OpenAI GPT-4o-mini", "React", "Node.js"],
+    "metrics": {
+      "improvement": "95% confidence vs 30% without documents",
+      "impact": "60% reduction in support tickets",
     },
-    liveDemo: true,
-    category: "AI/ML"
+    "liveDemo": true,
+    "liveDemoUrl": "https://aisupportbot.anujmahajan.dev",
+    "category": "AI/ML"
   },
   {
-    title: "E-commerce Platform",
-    description: "Full-featured online marketplace with advanced search, real-time inventory, and integrated payment processing. Includes admin dashboard and analytics.",
-    technologies: ["React", "Node.js", "PostgreSQL", "Stripe", "Redis"],
-    metrics: {
-      improvement: "60% faster page load times",
-      impact: "25% increase in conversion rate",
-      scale: "50,000+ products managed"
+    "title": "Modern E-commerce Platform",
+    "description": "Full-stack industrial e-commerce platform using serverless backend architecture on Vercel. Features phone OTP based login, JWT authentication, multi-payment gateway integration (Razorpay), admin panel for inventory and price management, and responsive mobile-first design. Includes useful features like address management, order tracking, and inquiry system.",
+    "technologies": [
+      "React 18",
+      "TypeScript", 
+      "Node.js",
+      "Express.js",
+      "PostgreSQL",
+      "Drizzle ORM",
+      "Razorpay",
+      "Twilio SMS",
+      "Tailwind CSS",
+      "TanStack Query",
+      "Vite",
+      "Vercel",
+    ],
+    "metrics": {
+      "performance": "85% faster page load with Vite",
+      "impact": "Real-time inventory and order management",
     },
-    liveDemo: true,
-    category: "E-commerce"
+    "liveDemo": true,
+    "liveDemoUrl": "https://vijaystore.anujmahajan.dev/",
+    "category": "E-commerce"
   },
   {
     title: "Data Analytics Dashboard",
@@ -166,6 +179,7 @@ export const projectsConfig = [
       scale: "1M+ data points analyzed daily"
     },
     liveDemo: true,
+    liveDemoUrl: null,
     category: "Analytics"
   },
   {
@@ -178,6 +192,7 @@ export const projectsConfig = [
       scale: "25,000+ active users"
     },
     liveDemo: false,
+    liveDemoUrl: null,
     category: "Mobile"
   },
   {
@@ -190,6 +205,7 @@ export const projectsConfig = [
       scale: "500+ services deployed"
     },
     liveDemo: false,
+    liveDemoUrl: null,
     category: "DevOps"
   },
   {
@@ -202,6 +218,7 @@ export const projectsConfig = [
       scale: "100,000+ articles generated"
     },
     liveDemo: true,
+    liveDemoUrl: "https://ai-content-generator.vercel.app",
     category: "AI/Content"
   }
 ];

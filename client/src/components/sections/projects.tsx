@@ -25,7 +25,20 @@ export default function ProjectsSection() {
                   <Badge variant="secondary" className="text-primary">
                     {project.category}
                   </Badge>
-                  {project.liveDemo && (
+                  {project.liveDemo && project.liveDemoUrl && (
+                    <a 
+                      href={project.liveDemoUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-block"
+                    >
+                      <Badge className="bg-green-500/20 text-green-400 border-green-500/20 hover:bg-green-500/30 cursor-pointer transition-colors">
+                        <ExternalLink className="h-3 w-3 mr-1" />
+                        Live Demo
+                      </Badge>
+                    </a>
+                  )}
+                  {project.liveDemo && !project.liveDemoUrl && (
                     <Badge className="bg-green-500/20 text-green-400 border-green-500/20">
                       <ExternalLink className="h-3 w-3 mr-1" />
                       Live Demo
@@ -53,9 +66,11 @@ export default function ProjectsSection() {
                   <div className="text-sm">
                     <span className="text-blue-400">📈 Impact:</span> {project.metrics.impact}
                   </div>
-                  <div className="text-sm">
-                    <span className="text-purple-400">📊 Scale:</span> {project.metrics.scale}
-                  </div>
+                  {project.metrics.scale && (
+                    <div className="text-sm">
+                      <span className="text-purple-400">📊 Scale:</span> {project.metrics.scale}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
