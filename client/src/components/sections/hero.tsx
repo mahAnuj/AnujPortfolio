@@ -55,7 +55,7 @@ I help companies leverage cutting-edge AI, scale their platforms, and deliver ex
             <Linkedin className="h-6 w-6" />
           </a>
           <a 
-            href="mailto:mahajananuj07@gmail.com" 
+            href="mailto:anujmahajan.dev@gmail.com" 
             className="text-muted-foreground hover:text-accent transition-colors"
           >
             <Mail className="h-6 w-6" />

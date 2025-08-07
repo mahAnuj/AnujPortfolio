@@ -37,7 +37,7 @@ async function testSendGrid() {
     mailService.setApiKey(process.env.SENDGRID_API_KEY);
     
     const testEmail = {
-      to: 'mahajananuj07@gmail.com',
+      to: 'anujmahajan.dev@gmail.com',
       from: 'mahajananuj07@gmail.com', // Must be verified
       subject: '🧪 SendGrid Test Email - ' + new Date().toISOString(),
       html: `

@@ -147,7 +147,7 @@ The contact form supports:
 
 ## 🔗 Connect
 
-- **Email**: mahajananuj07@gmail.com
+- **Email**: anujmahajan.dev@gmail.com
 - **WhatsApp**: +91 9560519689
 - **LinkedIn**: [Anuj Mahajan](https://www.linkedin.com/in/anuj-mahajan-a2063790/)
 - **GitHub**: [mahAnuj](https://github.com/mahAnuj)
