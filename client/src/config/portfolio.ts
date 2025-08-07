@@ -137,7 +137,7 @@ export const projectsConfig = [
     "description": "Complete AI assistant builder platform that transforms business documents into intelligent chatbots. Features document upload, RAG-powered responses, customizable widgets, and one-click deployment to any website.",
     "technologies": ["Next.js 14", "TypeScript", "OpenAI GPT-4o-mini", "React", "Node.js"],
     "metrics": {
-      "improvement": "95% confidence vs 30% without documents",
+      "performance": "95% confidence vs 30% without documents",
       "impact": "60% reduction in support tickets",
     },
     "liveDemo": true,
