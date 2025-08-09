@@ -116,17 +116,17 @@ export default function ContactSection() {
                 <div className="ml-4">
                   <h4 className="font-semibold">WhatsApp / Mobile</h4>
                   <a 
-                    href="https://wa.me/919560519689" 
+                    href="https://wa.me/919501513177" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-muted-foreground hover:text-green-400 transition-colors"
                   >
-                    +91 9560519689
+                    {/* +91 9501513177 */}
                   </a>
                 </div>
               </div>
 
-              <div className="flex items-center">
+              {/* <div className="flex items-center">
                 <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center">
                   <Linkedin className="h-5 w-5 text-accent" />
                 </div>
@@ -141,7 +141,7 @@ export default function ContactSection() {
                     Professional Networking Profile
                   </a>
                 </div>
-              </div>
+              </div> */}
 
               <div className="flex items-center">
                 <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">

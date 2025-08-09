@@ -46,14 +46,14 @@ I help companies leverage cutting-edge AI, scale their platforms, and deliver ex
         </div>
 
         <div className="flex items-center justify-center space-x-6">
-          <a 
+          {/* <a 
             href="https://www.linkedin.com/in/anuj-mahajan-a2063790/" 
             target="_blank" 
             rel="noopener noreferrer"
             className="text-muted-foreground hover:text-primary transition-colors"
           >
             <Linkedin className="h-6 w-6" />
-          </a>
+          </a> */}
           <a 
             href="mailto:anujmahajan.dev@gmail.com" 
             className="text-muted-foreground hover:text-accent transition-colors"
